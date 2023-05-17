@@ -24,6 +24,13 @@ jobs:
       - name: Build package
         run: npm run build
 
+      - name: Login to npm
+        run: npm login --registry=https://registry.npmjs.org --always-auth
+        env:
+          NPM_USERNAME: ${{ secrets.NPM_USERNAME }}
+          NPM_PASSWORD: ${{ secrets.NPM_PASSWORD }}
+          NPM_EMAIL: ${{ secrets.NPM_EMAIL }}
+
       - name: Publish to npm
         run: npm publish
         env:
