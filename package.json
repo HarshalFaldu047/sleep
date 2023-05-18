@@ -1,5 +1,5 @@
 {
-  "name": "sleep",
+  "name": "@harshalfaldu047/sleep",
   "version": "1.0.0",
   "description": "This is testing public package",
   "main": "dist/index.js",
@@ -19,6 +19,6 @@
     "typescript": "^5.0.4"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/@HarshalFaldu047"
+    "registry":"https://npm.pkg.github.com/"
   }
 }
