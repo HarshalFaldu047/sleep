@@ -1,7 +1,7 @@
 {
-  "name": "@harshalfaldu047/sleep",
-  "version": "1.0.1",
-  "description": "This is testing public package",
+  "name": "@thinkwik-products/sleep",
+  "version": "1.0.3",
+  "description": "Utility to sleep",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/HarshalFaldu047/sleep.git"
+    "url": "https://github.com/Thinkwik-Products/sleep.git"
   },
   "keywords": [],
-  "author": "Harshal Faldu",
+  "author": "Thinkwik",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^20.1.2",
