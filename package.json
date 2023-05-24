@@ -1,6 +1,6 @@
 {
   "name": "@thinkwik-products/sleep",
-  "version": "1.0.4",
+  "version": "1.0.1",
   "description": "Utility to sleep",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,6 +19,6 @@
     "typescript": "^5.0.4"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/"
+    "registry":"https://registry.npmjs.org/"
   }
 }
