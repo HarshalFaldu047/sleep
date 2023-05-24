@@ -1,5 +1,5 @@
 {
-  "name": "@thinkwik-products/sleep",
+  "name": "@thinkwik/sleep",
   "version": "1.0.1",
   "description": "Utility to sleep",
   "main": "dist/index.js",
