@@ -1,4 +1,20 @@
 # sleep
-Testing npm package
+No need to write syntax for setTimeout every time. 
 
-Add timeout for entered milliseconds. Default add timeout for 1000 milliseconds.
+# How to install
+
+```bash
+npm install @thinkwik/sleep
+```
+
+# Usage
+
+```typescript
+import { sleep } from '@thinkwik/sleep';
+
+sleep() // Default 1000 milliseconds
+
+sleep(2000) // Modified to 2 seconds
+
+sleep(3000) // Modified to 3 seconds
+```
