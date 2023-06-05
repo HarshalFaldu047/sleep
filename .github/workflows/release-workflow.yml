@@ -6,20 +6,75 @@ on:
     branches:
       - main
 
-jobs:
-  build:
-    runs-on: ubuntu-22.04
-    permissions:
-      contents: write
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        ref: ${{ github.sha }} # required for better experience using pre-releases
-        fetch-depth: '0'
+# jobs:
+#   build:
+#     runs-on: ubuntu-22.04
+#     permissions:
+#       contents: write
+#     steps:
+#     - uses: actions/checkout@v3
+#       with:
+#         ref: ${{ github.sha }} # required for better experience using pre-releases
+#         fetch-depth: '0'
 
-    - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.64.0 # Don't use @master or @v1 unless you're happy to test the latest version
-      env:
-        GITHUB_TOKEN: ${{ secrets.S_GITHUB_TOKEN }} # if you don't want to set write permissions use a PAT token
-        WITH_V: true
-        PRERELEASE: true
+#     - name: Bump version and push tag
+#       uses: anothrNick/github-tag-action@1.64.0 # Don't use @master or @v1 unless you're happy to test the latest version
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.S_GITHUB_TOKEN }} # if you don't want to set write permissions use a PAT token
+#         WITH_V: true
+#         PRERELEASE: true
+
+jobs:
+  create_tag_release:
+    name: Create Tag and Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Get version from package.json
+        id: get_version
+        run: echo "::set-output name=version::$(node -p "require('./package.json').version")"
+
+      - name: Create tag
+        id: create_tag
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git tag -a v${{ steps.get_version.outputs.version }} -m "Release v${{ steps.get_version.outputs.version }}"
+
+      - name: Push tag
+        run: git push origin ${{ steps.create_tag.outputs.tag }}
+
+      - name: Get commit messages since last tag
+        id: get_commit_messages
+        run: |
+          TAG=$(git describe --tags --abbrev=0)
+          COMMIT_MESSAGES=$(git log $TAG..HEAD --pretty=format:"%s")
+          echo "::set-output name=commit_messages::${COMMIT_MESSAGES}"
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.S_GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.get_version.outputs.version }}
+          release_name: Release v${{ steps.get_version.outputs.version }}
+          body: |
+            ${{ join(steps.get_commit_messages.outputs.commit_messages, '\n') }}
+          draft: false
+          prerelease: false
+
+      - name: Get Release ID
+        id: get_release_id
+        run: echo "::set-output name=release_id::${{ steps.create_release.outputs.release_id }}"
