@@ -11,7 +11,10 @@
     "type": "git",
     "url": "https://github.com/Thinkwik-Products/sleep.git"
   },
-  "keywords": [],
+  "keywords": [
+    "sleep",
+    "timeout"
+  ],
   "author": "Thinkwik",
   "license": "ISC",
   "devDependencies": {
