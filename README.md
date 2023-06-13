@@ -17,4 +17,5 @@ sleep() // Default 1000 milliseconds
 sleep(2000) // Modified to 2 seconds
 
 sleep(3000) // Modified to 3 seconds
+
 ```
