@@ -1,0 +1,29 @@
+name: Lint
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - '**'
+      - '!release'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.0
+
+      - name: Setup npm
+        run: npm i -g npm@9.6.2
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
