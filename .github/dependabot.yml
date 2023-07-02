@@ -11,3 +11,4 @@ updates:
       interval: 'weekly'
     reviewers:
       - 'sulay-sumaria'
+    open-pull-requests-limit: 100
