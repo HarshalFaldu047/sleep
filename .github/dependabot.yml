@@ -9,6 +9,4 @@ updates:
     directory: '/' # Location of package manifests
     schedule:
       interval: 'monthly'
-    reviewers:
-      - 'sulay-sumaria'
     open-pull-requests-limit: 100
